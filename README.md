@@ -34,7 +34,7 @@ Passos para rodar
 
 1. Clone este repositório:
 ```bash
-git clone [https://github.com/rodneygoisbsb/cypress-do-zero-a-nuvem.git](https://github.com/rodneygoisbsb/cypress-do-zero-a-nuvem.git)
+git clone https://github.com/rodneygoisbsb/cypress-do-zero-a-nuvem.git
 ```
 
 2. Acesse a pasta do projeto:
