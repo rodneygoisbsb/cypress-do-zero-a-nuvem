@@ -175,7 +175,7 @@ describe('Central de Atendimento ao cliente TAT', () => {
       })
   })
 
-  it.only('seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', () => {
+  it('seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', () => {
     cy.fixture('DOCUMENTO TESTE.pdf').as('arquivoPdf')
     
     cy.get('input[type="file"]')
