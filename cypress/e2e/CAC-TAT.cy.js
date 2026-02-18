@@ -11,6 +11,7 @@ describe('Central de Atendimento ao cliente TAT', () => {
   })
 
   it('preenche os campos obrigatórios e envia o formulário', () => {
+    cy.clock()
 
     const longText = Cypress._.repeat('abcdefgh', 30)
 
@@ -22,9 +23,14 @@ describe('Central de Atendimento ao cliente TAT', () => {
 
     cy.get('.success').should('be.visible')
 
+    cy.tick(3000)
+
+    cy.get('.success').should('not.be.visible')
+
   })
 
   it('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', () => {
+    cy.clock()
 
     cy.get('#firstName').type('Rodney')
     cy.get('#lastName').type('Gois')
@@ -33,6 +39,10 @@ describe('Central de Atendimento ao cliente TAT', () => {
     cy.contains('button', 'Enviar').click()
 
     cy.get('.error').should('be.visible')
+
+    cy.tick(3000)
+
+    cy.get('.success').should('not.be.visible')
 
   })
 
@@ -44,6 +54,7 @@ describe('Central de Atendimento ao cliente TAT', () => {
   })
 
   it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', () => {
+    cy.clock()
 
     cy.get('#firstName').type('Rodney')
     cy.get('#lastName').type('Gois')
@@ -53,6 +64,10 @@ describe('Central de Atendimento ao cliente TAT', () => {
     cy.contains('button', 'Enviar').click()
 
     cy.get('.error').should('be.visible')
+
+    cy.tick(3000)
+
+    cy.get('.success').should('not.be.visible')
 
   })
 
@@ -84,20 +99,33 @@ describe('Central de Atendimento ao cliente TAT', () => {
   })
 
   it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
+    cy.clock()
 
     cy.contains('button', 'Enviar').click()
 
     cy.get('.error').should('be.visible')
 
+    cy.tick(3000)
+
+    cy.get('.success').should('not.be.visible')
+
   })
 
   it('envia o formuário com sucesso usando um comando customizado', () => {
+    cy.clock()
+    
     cy.fillMandatoryFieldsAndSubmit()
 
     cy.get('.success').should('be.visible')
+
+    cy.tick(3000)
+
+    cy.get('.success').should('not.be.visible')
   })
 
   it('envia o formuário com sucesso usando um comando customizado - Recebendo um Objeto ', () => {
+    cy.clock()
+
     const data = {
       firstName: 'Fernando',
       lastName: 'Lucas',
@@ -107,12 +135,22 @@ describe('Central de Atendimento ao cliente TAT', () => {
     cy.fillMandatoryFieldsAndSubmit2(data)
 
     cy.get('.success').should('be.visible')
+
+    cy.tick(3000)
+
+    cy.get('.success').should('not.be.visible')
   })
 
   it('envia o formuário com sucesso usando um comando customizado - Objeto com valores padrão', () => {
+    cy.clock()
+    
     cy.fillMandatoryFieldsAndSubmit3()
 
     cy.get('.success').should('be.visible')
+
+    cy.tick(3000)
+
+    cy.get('.success').should('not.be.visible')
   })
 
   it('seleciona um produto (YouTube) por seu texto', () => {
