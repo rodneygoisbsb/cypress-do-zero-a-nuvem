@@ -113,7 +113,7 @@ describe('Central de Atendimento ao cliente TAT', () => {
 
   it('envia o formuário com sucesso usando um comando customizado', () => {
     cy.clock()
-    
+
     cy.fillMandatoryFieldsAndSubmit()
 
     cy.get('.success').should('be.visible')
@@ -143,7 +143,7 @@ describe('Central de Atendimento ao cliente TAT', () => {
 
   it('envia o formuário com sucesso usando um comando customizado - Objeto com valores padrão', () => {
     cy.clock()
-    
+
     cy.fillMandatoryFieldsAndSubmit3()
 
     cy.get('.success').should('be.visible')
@@ -215,12 +215,27 @@ describe('Central de Atendimento ao cliente TAT', () => {
 
   it('seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', () => {
     cy.fixture('DOCUMENTO TESTE.pdf').as('arquivoPdf')
-    
-    cy.get('input[type="file"]')
-    .selectFile('@arquivoPdf')
-    .should(input => {
-      expect(input[0].files[0].name).to.equal('DOCUMENTO TESTE.pdf')
-    })
 
+    cy.get('input[type="file"]')
+      .selectFile('@arquivoPdf')
+      .should(input => {
+        expect(input[0].files[0].name).to.equal('DOCUMENTO TESTE.pdf')
+      })
+
+  })
+
+  it('verifica que a política de privacidade abre em outra aba sem a necessidade de um clique', () => {
+    cy.contains('a', 'Política de Privacidade')
+      .should('have.attr', 'href', 'privacy.html') // have.attr = deve ter | href = atributo | privacy.html = valor
+      .and('have.attr', 'target', '_blank') // have.attr = deve ter | target = atributo | _blank = valor
+  })
+
+  it('acessa a página da política de privacidade removendo o target e então clicando no link', () => {
+    cy.contains('a', 'Política de Privacidade')
+      .invoke('removeAttr', 'target')
+      .click()
+
+    cy.contains('h1', 'CAC TAT - Política de Privacidade')
+      .should('be.visible')
   })
 }) 
